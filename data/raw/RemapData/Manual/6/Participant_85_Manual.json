@@ -1,0 +1,25 @@
+{
+    "participantName": "Participant 79 6B_A",
+    "partCount": 0,
+    "taskTime": 81.29730987548828,
+    "remappedPositionL": {
+        "x": -0.4699997305870056,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedPositionR": {
+        "x": -0.5799996256828308,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedScaleL": {
+        "x": 0.720003604888916,
+        "y": 0.720003604888916,
+        "z": 1.0
+    },
+    "remappedScaleR": {
+        "x": 0.7370033860206604,
+        "y": 0.7370033860206604,
+        "z": 1.0
+    }
+}

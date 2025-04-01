@@ -1,0 +1,25 @@
+{
+    "participantName": "Participant 42 4B_D",
+    "partCount": 0,
+    "taskTime": 71.86639404296875,
+    "remappedPositionL": {
+        "x": 0.3249998390674591,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedPositionR": {
+        "x": 0.3249998390674591,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedScaleL": {
+        "x": 0.6260048151016235,
+        "y": 0.6260048151016235,
+        "z": 1.0
+    },
+    "remappedScaleR": {
+        "x": 0.6260048151016235,
+        "y": 0.6260048151016235,
+        "z": 1.0
+    }
+}

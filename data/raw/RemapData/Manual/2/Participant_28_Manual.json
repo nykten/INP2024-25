@@ -1,0 +1,25 @@
+{
+    "participantName": "Participant 22 2D",
+    "partCount": 0,
+    "taskTime": 48.36557388305664,
+    "remappedPositionL": {
+        "x": 0.3749997913837433,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedPositionR": {
+        "x": 0.3749997913837433,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedScaleL": {
+        "x": 0.7150036692619324,
+        "y": 0.7150036692619324,
+        "z": 1.0
+    },
+    "remappedScaleR": {
+        "x": 0.7150036692619324,
+        "y": 0.7150036692619324,
+        "z": 1.0
+    }
+}

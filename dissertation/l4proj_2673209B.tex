@@ -1,0 +1,1170 @@
+% REMEMBER: You must not plagiarise anything in your report. Be extremely careful.
+\documentclass{l4proj}
+
+    
+%==============================================================================
+% Put any additional packages here
+% You can add any packages you want, as long as it does not alter
+% the overall format (e.g. don't change the margins or the reference style).
+%
+\usepackage{pdfpages} % if you want to include a PDF for an ethics checklist, for example
+%
+%
+
+\begin{document}
+
+%==============================================================================
+%% METADATA
+\title{Integrated Visual Field Testing and Remapping for Hemianopia using Virtual Reality Headset} % change this to your title
+\author{Nik Harith Sharifuddin bin Mohd Suhaimi}
+\date{March 24, 2025}
+
+\maketitle
+
+%==============================================================================
+%% ABSTRACT
+\begin{abstract}
+    % Every abstract follows a similar pattern. Motivate; set aims; describe work; explain results.
+    % \vskip 0.5em
+    % ``XYZ is bad. This project investigated ABC to determine if it was better. 
+    % ABC used XXX and YYY to implement ZZZ. This is particularly interesting as XXX and YYY have
+    % never been used together. It was found that  
+    % ABC was 20\% better than XYZ, though it caused rabies in half of the subjects.''
+
+    % Hemianopia is a visual impairment where parts of a person's visual field is blocked, thus limiting their overall awareness and significantly impacts their daily activities. Previous implementation has explored a method to remap the visual field through a VR headset camera into a patient's available visual field. However, this implementation requires the user to manually estimate their remapping process, which is a trikcy task and could cause discomfort with VR cybersickness. We present a method to automate the remapping process, reducing the effort required to perform the remapping process. Moreover, the system is integrated with another module, the Visual Field Testing (VFT) module, which allows users to determine the extent of their available visual field. This project follows the refinement of previous projects carried out by students before my time. Analysis shows that the system performs XX\% better than manually remapping it. Fitts test also shows that the system is easy to use.
+
+    Hemianopia is a neurological visual impairment resulting in the loss of half of the visual field and severe;y impacts the patient' spatial awareness and daily functioning. Traditional visual testing methods are often inaccessible, and rehabilitation methods offer limited relief. This project presents a novel, integrated virtual reality (VR) application that combines Visual Field Testing (VFT) and Visual Field Remapping (VFR) into a single, unified application using the HTC Vive Pro Eye headset. Building upon prior work, the integrated application also introduces a novel automatic remapping feature to apply preset visual corrections based on common hemianopia conditions, reducing user effort and potentially improving usability. A user study (n=8) with simulated visual impairment was conducted to evaluate efficiency, accuracy and user comfort. Results revealed that automatic remapping improved task efficiency and reduced cybersickness compared to manual methods, although further refinement is needed to enhance accuracy and perceived user comfort. The system was rated as intuitive and potentially beneficial for vision rehabilitation, suggesting its suitability as a platform for people with visual impairment, laying the groundwork for future developments in a comprehensive assistive VR application for the visually impaired.
+\end{abstract}
+
+%==============================================================================
+%% ACKNOWLEDGEMENTS
+\chapter*{Acknowledgements}
+
+I would like to sincerely thank my project partner, Caleb Mok, for his support, collaboration, and valuable input throughout this project. Working together made the process more enjoyable and helped push the system further than I could have managed alone.
+
+I am also grateful to my supervisor, Dr. Paul Siebert, for his guidance and feedback at every stage. His insights were instrumental in shaping both the technical and research direction of this work.
+% Enter any acknowledgements here. This is optional; you may leave this blank if you wish,
+% or remove the entire chapter
+%
+% We give thanks to the Gods of LaTeX, who in their eternal graciousness, 
+% have granted that this document may compile without errors or overfull hboxes.
+%
+
+%==============================================================================
+
+% EDUCATION REUSE CONSENT FORM
+% If you consent to your project being shown to future students for educational purposes
+% then insert your name and the date below to  sign the education use form that appears in the front of the document. 
+% You must explicitly give consent if you wish to do so.
+% If you sign, your project may be included in the Hall of Fame if it scores particularly highly.
+%
+% Please note that you are under no obligation to sign 
+% this declaration, but doing so would help future students.
+%
+\def\consentname {Nik Harith Sharifuddin bin Mohd Suhaimi} % your full name
+\def\consentdate {24 March 2025} % the date you agree
+%
+\educationalconsent
+
+
+%==============================================================================
+\tableofcontents
+
+%==============================================================================
+%% Notes on formatting
+%==============================================================================
+% The first page, abstract and table of contents are numbered using Roman numerals and are not
+% included in the page count. 
+%
+% From now on pages are numbered
+% using Arabic numerals. Therefore, immediately after the first call to \chapter we need the call
+% \pagenumbering{arabic} and this should be called once only in the document. 
+%
+%
+% The first Chapter should then be on page 1. 
+
+% PAGE LIMITS
+% You are allowed 40 pages for a 40 credit project and 30 pages for a 
+% 20 credit report. 
+% This includes everything numbered in Arabic numerals (excluding front matter) up
+% to but *excluding the appendices and bibliography*.
+%
+% FORMATTING
+% You must not alter text size (it is currently 10pt) or alter margins or spacing.
+% Do not alter the bibliography style. 
+%
+%==================================================================================================================================
+%
+% IMPORTANT
+% The chapter headings and structure here are **suggestions**. You don't have to follow this model if
+% it doesn't fit your project. Every project should have an introduction and conclusion,
+% however.  If in doubt, your supervisor can give you specific guidance; their view takes precedence over
+% the structure suggested here.
+%
+%==================================================================================================================================
+\chapter{Introduction}
+
+% reset page numbering. Don't remove this!
+\pagenumbering{arabic} 
+
+% You can use \todo{} to mark text that needs to be fixed. Anything inside will appear as highlighted 
+% text in the final copy, and you will also get warnings when you compile (so you don't
+% forget to take them out!)
+
+
+\section{Motivation}
+% The primary aim of this project is to develop a method to automate the process of 'remapping' or the adjustment of the live camera feed from a VR headset onto the available visual field of a Hemianopia patient, potentially by using the data from a visual field testing (VFT) and reducing the effort to perform the remapping process and increase comfortability of the system.
+
+% This project presents an integrated VR-based visual field testing and remapping application where users can measure their visual field and retrieve a report from the application. Within the same application, it is also possible to 'remap' the users' vision to compensate for the area with eyesight loss.
+
+% Hemianopia is a visual impairment that causes the field of view (FOV) of each eye to be reduced, thus affecting the overall FOV for both eyes. It is commonly caused after patients suffer brain damage such as stroke, and the reduced FOV means that patients suffer limited awareness in their everyday life such as navigating their surroundings and pouring drinks can be challenging. 
+
+% Previous works concerning methods to alleviate the effect of Hemianopia include a work from a previous University student by utilising the HTC Vive ProEye headset to resize the live camera feed of the headset into the available visual field area of the user. Furthermore, there was also an implementation using the same headset where users could measure the extent of their visual field using the eye-tracker of the same headset. Therefore, the idea is to take both of these implementations and combine those functionalities on a single platform.
+
+Hemianopia is a neurological visual impairment that results in the loss of half of the visual field in one or both eyes. This condition is commonly caused by damage to the primary visual pathways in the brain, particularly due to strokes, traumatic brain injuries, tumors, or neurodegenerative diseases. Since the damage occurs in the brain rather than the eyes themselves, individuals with hemianopia often retain healthy ocular function but experience a significant reduction in their field of view (FOV), affecting their overall spatial awareness.  
+
+The impact of hemianopia on daily life can be profound. Individuals with this condition struggle with basic tasks that rely on a full visual field, such as navigating through crowded spaces, crossing streets, reading, and even identifying objects in their surroundings. Simple activities like pouring liquids, preparing food, or recognizing people approaching from the affected side become challenging, increasing the risk of accidents and reducing overall independence. Moreover, hemianopia can affect driving ability, rendering individuals unable to meet legal vision requirements for operating a vehicle. These limitations significantly impact quality of life, often leading to frustration, anxiety, and social withdrawal.  
+
+Traditional approaches to managing hemianopia include optical aids, such as prism glasses, which shift images from the blind field into the remaining functional vision. However, these solutions often have limitations, including distortion, adaptation difficulties, and discomfort. Rehabilitation strategies, such as compensatory training and saccadic eye movement exercises, aim to help patients adjust by actively scanning their surroundings. While these methods can improve navigation and object detection, they require extensive training and do not restore the lost visual field.  
+
+Given these challenges, there is a growing interest in leveraging emerging technologies such as virtual reality (VR) to address the limitations of current hemianopia interventions. VR offers a promising alternative by allowing real-time manipulation of visual information, enabling customized solutions that dynamically adjust the user's field of view. This project seeks to explore the potential of VR-based solutions by integrating visual field testing and remapping functionalities into a single platform. By utilizing the HTC Vive Pro Eye headset’s capabilities, users can first measure the extent of their visual field loss and subsequently apply real-time visual adjustments to compensate for the missing areas. This approach has the potential to improve accessibility and provide a more intuitive and effective method for individuals with hemianopia to navigate their environment.
+
+\section{Project Aim}
+There is a need to develop a single VR application platform that integrates the functionalities of both Visual Field Testing (VFT) and the Visual Field Remapping (VFR) of it using a VR headset, in this case, the HTC Vive ProEye. Additionally, we will develop a new functionality to take the data from the visual field testing and apply the visual field adjustment in the remapping process, automating the process without the need for the user to manually remap their visual field, which could cause cybersickness in some cases \cite{Perri2022CybersicknessStudy}. The integration of these functionalities enables the development of a unified platform capable of conducting eye examinations while simultaneously providing corrective interventions or supportive measures aimed at enhancing motor functions in individuals with Hemianopia.
+
+\section{Content Outline}
+This section provides an overview of the structure of this paper, with a summary of each chapter's contents.
+Please refer to the below for each chapter's summary:
+\begin{itemize}    
+    \item
+      \textbf{Background:} This chapter provides the context for the rest of the paper. It provides the information of hemianopia, current capabilities with VR, as well as past works and attempts by both the general public and past students.
+    \item
+      \textbf{Analysis/Requirements:} This chapter outlines the problem statement. We break down our problem statement into functional requirements and non-functional requirements, setting attainable goals for the project and for our design and implementation chapters.
+    \item
+      \textbf{Design: } In this chapter, we outline the system architecture. We will discuss about how the final design came about and the decisions made along the way.
+    \item
+      \textbf{Implementation:} In this chapter, we explain how the project has been developed using our design. It highlights our challenges to implement the way it was designed and our decision to pivot and use previous implementations due to the lack of SDK support.
+    \item
+      \textbf{Evaluation:} This chapter provides the methodology of our user evaluation. It discusses the results we collected from our usability testing and the data collected during user testing. Furthermore, we can prove our hypothesis that using automated visual field remapping is more efficient than using manual visual field remapping using the collected data.
+    \item
+      \textbf{Conclusion:} Finally, this chapter summarises our paper and its findings, as well as outlining possible future works.
+\end{itemize}
+
+
+
+%==================================================================================================================================
+\chapter{Background}
+% \todo{What did other people do, and how is it relevant to what you want to do?}
+
+\section{Hemianopia}
+Hemianopia refers to a group of visual defects that cause partial loss of vision or blindness and are commonly caused by stroke, seizures, or other forms of brain injury. Homonymous Hemianopia (HH) affects approximately 10\% of stroke patients, where one-half of the visual field of the person is not functional or blind. Bitemporal hemianopia occurs when the outer half of the visual field for each eye is lost, while binasal hemianopia occurs in the inner half of each eye. Quadrantanopia, on the other hand, occurs when one-quarter of the vision field is blinded.
+
+\subsection{Living with hemianopia}
+% \todo{Include sample  simulation of a hemianopic person img}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/hemianopia paris.png}
+    \caption{The vision of a person with homonymous hemianopia, with only half of their vision of each eye are available}
+    \label{fig:hemianopiaView}
+\end{figure}
+
+Patients suffering from hemianopia potentially face various challenges, from inability to read and drive to difficulties when attempting to navigate, according to \cite{Goodwin2014}. This would also decrease their independence and their capability to enjoy leisure activities, impacting their emotional and social state.
+
+As Hemianopia is a \textit{cortical} visual impairment rather than \textit{retinal}; where the visual impairment happens due to damage to the brain instead of the eye itself, common ways of alleviating Hemianopia are often not the most ideal, and glasses with corrective glasses offers only limited improvements to wearers \cite{Bowers2008Community-BasedHemianopia}.
+
+
+
+\section{Visual Field Testing}
+In ophthalmology, a visual field test is a testing procedure in which an ophthalmologist measures how much vision you have in either eye and diagnoses any vision loss that may have occurred. A report will usually be generated after each test and it could be used to diagnose the conditions of the eye.
+
+There are several methods of visual field testing that had been developed over decades. The most basic one is \textbf{confrontation visual field test}, where a clinician or ophthalmologist will instruct a patient to look to an object in front of them while the doctor simply holds up their fingers in the areas of the patient's side vision to detect any visual field problems. More advanced methods of visual field testing exist, such as the \textit{Goldmann perimeter machine} developed by Hans Goldmann in the 1940s, which was used for decades after its inception \cite{johnson2011history}. The machine worked by superimposing stimuli in the background of a semi-spherical bowl that had uniform background illumination. This method, however requires manual operation to move the stimulus and map the visual field and as such, \cite{JoyNCarroll2013} described that it is now uncommon to see them used these days as they are now replaced by automated perimetry testing.
+
+
+\subsection{Humphrey Visual Field}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth ]{images/hvf-greyscale.png}
+    \caption{An example of a greyscale chart from an HVF test result}
+\end{figure}
+
+A well-known example of automated perimetry testing is the Humphrey Visual Field Analyser where visual field testing is performed automatically with the aid of computers. It works the same way to how a Goldmann machine would work except that the stimuli are generated automatically and instead of \textit{'moving'} the stimulus, the stimulus are \textit{'flashed'} within the semi-spherical bowl background. This is called \textit{static perimetry} instead of kinetic like the one used in a Goldmann machine. When these stimuli appear, patients are instructed to press a button to signal that they can see the stimulus and from that feedback, the data goes through an algorithm, and a report of the patient's visual field will be generated automatically.
+
+\section{Virtual Reality (VR)}
+Virtual Reality, or VR for short, is a technology that allows the user be immersed in a simulated 3D environment, usually through a device commonly known as a head-mounted display (HMD) device \cite{Berkman2024HistoryReality}. Apart from visual simulation, auditory, haptic feedback, and perception of movement may also be simulated to enhance its immersiveness and presence within the virtual environment. 
+
+The first HMD that was developed in 1961, The Headsight, was a surveillance device with a camera attached to it. It was not initially intended to be VR technology (\cite{Bown2017LookingReality}); however, due to the use of sensors to track the head movements, it contributed towards a great breakthrough in VR technology as it provided the basis of interactivity when using the technology.
+
+At present, there are various manufacturers of HMDs, each of them employing wide variety of features in their devices such as eye tracking, face tracking and \textit{'passthrough'} capabilities where the users could see the real world through the HMD's camera, enabling a mixed-reality experience where virtual elements are overlaid on top of the real world environment.
+
+\subsection{VR as an Assistive Tool for Visually Impaired People}
+\cite{Li2022AImpaired} has compiled numerous examples where HMDs are used as a way to provide assistance or therapy for people with visual impairment. Their analysis reviewed recent academic literatures and classified them according to the type of HMDs used and whether they are used in an assistive or therapeutic purposes. 
+
+Their findings revealed that two-thirds of the articles were classified to provide assistive technology, which could be explained by the fact that a lot of the targeted visual impairments were not easily treatable using external equipment. Nonetheless, they still provide a great insight and areas of opportunity to what is possible using VR technology for the visually impaired.
+
+\subsection{VF Testing and Remapping using VR headset}
+There have been several attempts to use VR headsets as a way to remap one's visual field to alleviate the effect of Hemianopia. \cite{Sayed2020ExpansionSpectacles} attempted to produce a prototype device that could measure the visual field (VFT\footnote{Visual Field Testing}) and also expand the visual field of the user (VFR\footnote{Visual Field Remapping}). Coincidentally, their team also used the same HMD, the HTC Vive headset, the same headset that will be used for this project. 
+
+They emulated the visual field measuring procedure based on the HVF automated perimetry technique testing 52 stimuli across the visual field. This produces results that closely match the results of standard HVF test when compared. 
+
+For the remapping process, they used the data from their VF testing procedure and map the 52 stimuli to a 8x8 matrix, where it was then transformed based on the stimuli that are valid or invalid. A special calculation was employed to determine the largest available area from the visual field where the final image output could be remapped. In their experiment to evaluate the effectiveness of their remapping technique, visually impaired participants were firstly shown test images which show simple objects in the periphery view \footnote{The edges of visual field/vision} such as cars or trees in the HMD view and were asked to describe what they could see. After the image remapping was applied, the participants were asked again to describe the image they saw. Results showed that 78\% of participants found the image remapping was helpful to identify the objects situated in the peripheral area of the vision in which they could not see them before the image remapping was applied.
+
+In their next publication, the same authors, \cite{Sayed2020ExpansionSpectacles} further evaluated the efficacy of the application by introducing a new experiment task where participants would need to go through a virtual walking simulation that is displayed on a screen in front of them while wearing the HMD with a special camera set up on its front. In the simulation, participants are tasked to navigate through a long corridor while avoiding obstacles and identifying several objects that blocked their path. Results from the experiment upholds the fact that their \textbf{\textit{prototype}} was proven to be beneficial to the participants. 
+
+The contributions by \cite{Sayed2020ExpansionSpectacles} align closely with what this project aims to achieve. While the authors managed to devise a working prototype of an integrated VF Testing and Remapping, some shortcomings could be addressed in this project, such as the lack of evaluation in terms of comfort and cybersickness when using the HMD for their application. This provides an opportunity for this project to assess the comfort factor and devise proposals that could enhance the comfort and usability of the application. Another shortcoming of their project is the lack of a public repository documenting the work that they have done, limiting further contributions towards the improvement of the application and the addition of possible new features.
+
+
+\section{Prior Investigations of using VR for VF Testing and Remapping within the department}
+
+In addition to the work of general researchers, previous students under the same supervisor have also contributed in exploring the potential use of VR to improve the lives of patients with Hemianopia. \cite{Garcia2021} firstly attempted the approach to shifting the full FOV into the healthy FOV of a Hemianopic person using the live camera feed mounted on an HMD, where it was then remapped using Python. Though he planned to run a user evaluation, it was not carried out in the end due to hardware failure during the planned period he intended to run his experiments. Hence, the study produced no evaluation data. 
+
+\cite{Liu2022VisualHemianopia} took a different path and focused instead on implementing the algorithm to remap the camera feed to fit into irregular shapes. It aimed to resolve the problem of determining how to fit the whole FOV into the available FOV of a person with hemianopia. Liu's implementation uses Python to create a VF testing application inspired by the Rarebit Perimetry VF testing method. Due to delays installing the HMD they were planning to use, a working VR application was not produced at the end of the project.
+
+\subsection{Functional VR applications}
+More recently, \cite{Russell2023} successfully devised a fully functional VR application as part of his dissertation project, which focused on remapping the live camera feed of the HMD. Users could control the live camera feed using the HMD's controller, and the application also had 2 different ways to remap the camera. Although the results of his user evaluation suggest that the remapping of the visual field worsens the ability to complete the task of his experiment, a separate study with a patient with real hemianopia revealed the potential for helpfulness and possibly help for patients with real hemianopia. There are also major concerns of cybersickness found as part of the project's evaluation, with one of the provided ways to remap the camera being more prone to cybersickness over the other way. Therefore, there is a need to further develop a novel method to improve the method to remap the camera feed and reduce the effort needed to perform the remapping and potentially reduce the effect of cybersickness.
+% \todo{mention the unsuitability of some modes that could cause motion sickness. Put a hypothesis that if we use automatic remapping, it will improve and reduce their effort to do so}
+
+On the other hand, another usable VR application had also been produced by \cite{Macintosh2024} that focused on implementing a common visual field testing method with VR to map the available visual field of the user. This project made use of the eye tracker available on the HMD to provide feedback to the user during the VF testing to increase the reliability of the process on the HMD and reduce false positives that may occur during the test. When a user goes through the visual field testing, a report of the visual field of their eyes is then generated, complete with metrics such as the false positive rates and a chart of how far their eyes wandered, giving the user a deeper look at how valid their test results were. 
+
+Both of the above contributions paved the way towards not only a more accessible way to measure the visual field of the eye but also provide ways to alleviate the effects using VR. That being said, these are two separate projects that did not build on top of the other and were hence uncoupled from one another. As Harvey had discussed in his project, integrating a VF testing module into the Remapping module could improve the remapping process by automating it and, thus, reduce the effort needed to manually remap their vision.
+
+\section{Summary}
+In this chapter, we introduced the context of this project, analysing the various background topics related to understanding our motivations and objectives of this project. 
+
+Under Hemianopia, we introduced the definition of the illness, the various types of visual defects that occur with this condition, and how it affects people that suffer from these conditions, ranging from decreased independence and hardship to perform day-to-day activities until it could affect them mentally. This set us on a goal to help people with hemianopia and explore innovative methods to alleviate the effects of the condition.
+
+Secondly, we provide context of how visual field testing works and the common methodologies used to carry out these tests. While these methodologies provide great and informative reports on one's visual field, access to those tools is not easy and mostly requires a specialist to operate them. Therefore by creating a VR-based visual field testing method, this could potentially provide a more accessible way to analyse one's visual field.
+
+We also discussed prior works that had been done in recent years, with notable contributions by students under the same supervisor which served as a basis of this project. We identified an opportunity from these contributions where multiple functionalities could be integrated into a single system that would provide the functionalities required to help people with hemianopia from the first step of identifying it by performing a visual field test until the step where we could alleviate the effects of hemianopia by remapping the visual field. Thus, we will outline these requirements of such a system in the following chapter.
+
+
+%==================================================================================================================================
+\chapter{Analysis/Requirements}
+\label{sec:analysisReq}
+% \todo{What is the problem that you want to solve, and how did you arrive at it?}
+After providing the context of our problem in the previous chapter, we will proceed by stating our problem statement that we would like to address in the context of this project. Following that, we will define the requirements needed to solve the stated problem
+% \section{Guidance}
+% Make it clear how you derived the constrained form of your problem via a clear and logical process. 
+
+% The analysis chapter explains the process by which you arrive at a concrete design. In software 
+% engineering projects, this will include a statement of the requirement capture process and the
+% derived requirements.
+
+% In research projects, it will involve developing a design drawing on
+% the work established in the background, and stating how the space of possible projects was
+% sensibly narrowed down to what you have done.
+
+\section{Problem Specification}
+Following the previous implementations by students under my supervisor, the main aim of this project is to continue their works and combine the functionalities of Visual Field Testing (VFT) and Visual Field Remapping (VFR) into a single platform that is integrated seamlessly with a common and suitable user interface for use with real patients. This would allow a user to test their visual field and perform remapping without switching applications, which also opens up possibilities for future workflows of using the data from visual field testing to perform the remapping process. To demonstrate this future capability, an additional functionality where presets of automatic remapping process based on select visual field defects will be developed and evaluated with a sample of users to measure its effectiveness, usability and accuracy.
+
+% As a part of a bigger vision for the end product, this project aim to 
+
+% As data from visual testing could potentially be used to perform automatic of the visual field, the capabilities to do so are also explored and interfaces to extend these capabilities are provided for future extensions.
+\section{Integration of Visual Field Testing and Remapping}
+This work constitutes a part of a broader project under the School of Computing Sciences, developed in conjunction with a parallel project on Visual Field Remapping led by Caleb Mok. While this project will focus more on alleviating the visual field loss of people with hemianopia,  Caleb’s work delves into the implementation of VR-based visual field measurement, which will be referenced frequently throughout this dissertation.
+
+Both projects are designed to create a seamless workflow, progressing from initial testing and quantification of visual field impairments to the development of VR-based remediation techniques.
+
+\section{Functional Requirements}
+The application should adhere to the following functional requirements:
+\begin{itemize}
+    \item Should integrate both Visual Field Testing and Visual Field Remapping modules.
+    \item Should have a consistent user interface across all menus and modules.
+    \item Controls should be intuitive so that the average user knows how to use them.
+    \item Should be able to perform visual field testing.
+    \item Should be able to generate a report from the visual field testing module.
+    \item Should be able to use the HMD's camera and perform visual field remapping.
+    \item Should be able to perform automatic remapping based on presets.
+\end{itemize}
+
+
+\section{Non-functional Requirements}
+The application should also aim to adhere to these non-functional requirements:
+\begin{itemize}
+    \item Should be usable even for non-experienced VR users.
+    \item Should be comfortable for users to use it without causing too much motion sickness.
+    \item Should be deployable and used independently by anyone.
+    \item Source code should be open-sourced and available to be extended for future works.
+\end{itemize}
+
+\section{Changes to Specification}
+Initially, the application development aimed to fully make use of the eye data collected using the VFT module, where personalised automatic remapping could be performed based on each person's eye. However, due to the late access gained to the previous project and its setup, proper implementation of this functionality could not be achieved within time, and instead, efforts were focused on building the single integrated application with an additional small interface that showcases the possibility of the said functionality.
+
+% Initially, the application development aimed to port the existing modules built by previous students and upgrading them to a newer version of Unity (the software tool used to build the modules, will be discussed late in Implementation section). However, due to 
+
+\section{Summary}
+In this chapter, we have laid the foundations of the requirements of the integrated application we want to develop in this project. Recognising the potential of an integrated system, we specified the required functionalities that must be included in the system, with a great focus on making both of the modules we want to integrate work seamlessly. While not crucial to the main functionalities of the system, we defined requirements that would improve the general usability of the system and set it so that it could be extended in the future. We also briefly discuss the changes made from the initial plans due to changing situations that occurred during development.
+
+Based on these requirements, we will plan the design of the integrated system workflow, along with the proposed implementation of automatic remapping as a new feature in the next chapter.
+
+
+%==================================================================================================================================
+\chapter{Design}
+\label{sec:design}
+% \todo{How is this problem to be approached, without reference to specific implementation details?}
+% \section{Guidance}
+% Design should cover the abstract design in such a way that someone else might be able to do what you did, 
+% but with a different language or library or tool. This might include overall system architecture diagrams,
+% user interface designs (wireframes/personas/etc.), protocol specifications, algorithms, data set design choices,
+% among others. Specific languages, technical choices, libraries and such like should not usually appear in the design. These are implementation details.
+This chapter directly addresses the requirements specified in the previous chapters with designs and plans of the upcoming application that would later be implemented in the coming chapters.
+
+\section{Overall structure}
+The final application would consist of one single platform that integrates both Visual Field Testing and Visual Field Remapping. Both of these originally separate modules will be inherited from the previous projects of \cite{Macintosh2024} and \cite{Russell2023}, and then ported to a new single project file where further improvements will be applied. 
+
+A common, unified user interface will be applied throughout the application to enhance the usability and further emphasize the integrated nature of the application. Given the different functionalities of each module, a main menu, namely the Core Menu, will be made to encompass both modules and serve as the first thing the user will be greeted with when starting the application.
+
+% \section{An Integrated system}
+% \todo{Explain the different modules, and plans on how to integrate them. How would they possibly integrate with each other?}
+
+\section{Workflow}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1.0\linewidth]{images/designDiagramVert.png}
+    \caption{Figure shows a high-level workflow diagram of the planned integrated application}
+    \label{fig:designDiagram}
+\end{figure}
+
+% \todo{Explain general workflow, how people would theoretically use the system, going into deeper parts of the system. How would users end their tasks? where would they go after that?}
+
+% \includegraphics[width=\textwidth]{images/Design_Diagram.png}
+
+Upon the start of the application, the user will arrive at the Core Menu, where 2 separate panels will lead the user to the respective modules of VFT and VFR. A short description of each of the modules will also be available in their respective panel. 
+
+By clicking a button on either one of the panels, the user will enter the submenu of the selected module. Within this submenu, there will be options to perform the visual field testing in the VFT module or perform remapping in the VFR module. There will also be an option to go back to the main menu, enabling users to switch between the two modules within the same application.
+
+
+\section{User Interfaces and Menus}
+% \todo{Show the basic menu from VRMenuing imgs}
+
+The interface of menus within the system must follow the same design and pattern to ensure formality across all scenes/menus. It should be simple, correctly sized and easy to read by any types of users that will use the application. `Panels' will be used as the base of any 2D elements such as menus, texts and buttons. They will be coloured in a basic semi-transparent grey colour to provide enough contrast against the text elements that will be appended on them. 
+
+Primary buttons will be coloured blue, and secondary buttons will be coloured light grey. Buttons must also provide visual feedback when pressed to indicate it was interacted with by the user, such as when hovered or clicked. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/VRMenuing CORE.png}
+    \caption{The proposed interface that will be used as the menu}
+    \label{fig:vrmenuing}
+\end{figure}
+
+\section{Visual Field Testing}
+% \todo{Explain VF Testing routine and how it works here}
+
+When the user goes into the VFT module, there should be 2 options to perform the visual field testing:
+\begin{itemize}
+    \item \textbf{Test with feedback;} visual feedback will be available when performing the test.
+    \item \textbf{Test without feedback;} no visual feedback will be provided when performing the test.
+\end{itemize}
+
+As this project puts more emphasis on the VF Remapping module and the collaborative nature of this project as outlined in \ref{sec:analysisReq}, this section will only briefly cover the design of VF Testing. Generally speaking, the workflow of VF Testing would be carried out by the following steps:
+
+\begin{itemize}
+    \item The user launches the test.
+    \item There will be a central point fixated at the centre of the user's view, which the user must focus throughout the test.
+    \item After pressing a physical key (i.e. the space bar)  or clicking, a countdown will start before the test begins.
+    \item Once the test begins, the module would generate and flash stimuli across the user's FOV\footnote{field of view} every few seconds.
+    \item The user must press the physical key every time they see a stimulus flashed in their FOV.
+    \item To ensure the validity of the test and reduce false positive entries, the eye-tracking capabilities of the HMD will be used to inform the user whether they are looking at the centre or not.
+\end{itemize}
+
+% The VF Test is designed as follow:
+% - There will be a central point fixated at the centre of the user's view.
+% - The user will be required to look at the central fixation point at all times during the test.
+% - During the test stimulus will be generated over a blank background and flashes every few seconds.
+% - Users must press the physical key every time they see a stimulus flashed.
+
+% \todo{Ask Paul how do I mention caleb is working on this part?}
+
+\section{Visual Field Remapping}
+\label{sec:VFR}
+% \todo{Explain how remapping works, how to add automation onto it.}
+
+The VF Remapping module essentially works by obtaining the live feed of the HMD's camera. Then, transformations are applied to it, enabling the live camera feed to be fitted into the visible FOV of a hemianopic person. 
+
+Within this module, there will be 3 different modes users could choose:
+\begin{itemize}
+    \item \textbf{Manual Remap}, X\&Y-scale
+    \item \textbf{Manual Remap}, X-scale only
+    \item \textbf{Automatic Remap}
+\end{itemize}
+
+In both manual remapping modes, users will be able to manipulate the live camera feed on the X-axis freely. However, when scaling, the X\&Y-scale mode will scale the FOV on the X and Y axis uniformly. Meanwhile, the X-axis-only mode will be restricted to scale the FOV on the X-axis.
+
+\subsection{Automatic Remapping}
+A new planned feature of this project is to include a novel method to perform the process of remapping the live camera feed onto the visible hemianopic FOV without the need for manual adjustments and instead, the adjustments would be applied automatically. This would be achieved simply by applying a pre-defined scaling factor and position to the live camera feed within the HMD.
+
+Originally, this new feature was proposed to make use of the data outputted by the VF Testing module based on the calculated available visual field after the test. We would then use this information to apply highly personalised transformation onto the live camera feed, theoretically resulting in a more accurate remapped vision. However, due to the complexity of the task, the idea was scrapped for the scope of this project. 
+
+Instead, for the scope of this project, we aim to provide an example of how this feature would work by defining a preset for the automatic remapping transformations and developing the relevant codes required to perform it. As there are various types of visual defects to cover with the automatic remapping, only 4 types of hemianopia as shown below are selected to demonstrate this feature:
+
+\begin{itemize}
+\label{item:autoRemapConds}
+    \item \textbf{Homonymous hemianopia} - Right
+    \item \textbf{Homonymous hemianopia} - Left
+    \item \textbf{Quadrantanopia} - Right Temporal (Top-right quarter)
+    \item \textbf{Quadrantanopia} - Left Parietal (Bottom-left quarter)
+\end{itemize}
+
+
+Essentially, the implementation of this feature would closely follow how a manual remapping algorithm was implemented by \cite{Russell2023} in his original project, albeit with some modifications. In his original algorithm, he employed a continuous increment or decrement onto the position or scaling of the FOV when the controller input is detected, resulting in gradual shifts to the live camera feed. To implement automatic remapping, the algorithm simply needed to be placed within a while loop where the increment or decrement is applied over time until the desired position and scaling are achieved.
+
+\begin{algorithm}[!h]
+\caption{Automatic remapping algorithm}
+\label{alg:autoRemapPseudo}
+
+
+Scale Adjustment\;
+\While{currentScale $\geq$ targetScale}{
+    currentScale $\gets$ Vector3(scaleFactor, scaleFactor, scaleFactor) * Time\;
+}
+% \vskip
+Position Adjustment\;
+\While{currentPosition $\geq$ targetPosition}{
+    currentPosition $\gets$ Vector3(position Factor, 0, 0)\;
+}
+
+\end{algorithm}
+
+When a user selects one of the preset conditions outlined above, the increment/decrement will be applied gradually to the live camera passthrough until the preset conditions are met, without the need of additional input from the user. This would potentially result in reduced effort, improved accuracy and increased comfort, which we will evaluate later in \textbf{\autoref{sec:Eval}}.
+
+
+% \todo{Write about how the system will be designed to integrate both modules and why. ERD for the whole system. User interface with VRMenuing results}
+
+\section{Summary}
+This chapter discusses the design decisions in various areas in our project and how the workflow would look in the final product. The planned common user interface that will be implemented and standardised throughout the different modules of our project was also outlined. The core functionalities of VFT and VFR are to be inherited and implemented as per the previous implementations. Finally, a new planned feature of automatic remapping is also discussed as a new improvement for VFR module. 
+
+The next chapter will attempt to convert what have just been discussed in this chapter into functional  \textit{implementations} through the use of various tools, Software Development Kits (SDK), scripting and, most importantly, the use of an HMD for this project, producing a complete working application at the end.
+
+%==================================================================================================================================
+\chapter{Implementation}
+\label{sec:implementation}
+% \todo{What did you do to implement this idea, and what technical achievements did you make?}
+% \section{Guidance}
+% You can't talk about everything. Cover the high level first, then cover important, relevant or impressive details.
+
+Having defined the design specifications, this chapter explains the hardware, software tools and environment used to convert the design into a working application. The system architecture is also to be explained in this chapter, with great focus on Unity as the main software tool of this project.
+
+\section{Hardware}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/HTCVive.jpg}
+    \caption{The HTC Vive Pro Eye headset used in the project}
+    \label{fig:htc-vive}
+\end{figure}
+For this project, we used an HTC Vive Pro Eye VR headset, following the same setup as done with previous implementations by \cite{Russell2023} and \cite{Macintosh2024}. The headset was selected as it had features crucial to the projects, which are the cameras positioned in front of the headset that would provide a decent view of the real world environment thanks to its $1600 \times 1200$ resolution and its eye-tracking capabilities that were essential to support the implementation of VF Testing using the headset. There are also motion-tracking controllers that come with the headset, providing support for any required user interactions. The tracking setup of the headset follows an \textit{'outside in'} setup where it requires 2 'base stations' which are essentially IR\footnote{infrared} sensors that tracks the headset in 3D space, rather than the sensors being built into the headset itself (also called as \textit{inside out}). The headset also required itself to be tethered to a PC\footnote{personal computer} in order for it to run. This setup means that movement is limited when using the headset, and therefore, it is not portable.
+
+
+\section{Unity}
+The primary software utilized for this project is Unity, a development engine originally designed for game creation but now widely applied across various industries, including virtual reality, architecture, and engineering. This project specifically employs Unity version 2019.4.35f1 due to compatibility constraints imposed by the required packages for camera passthrough and eye-tracking functionalities. These limitations also prevented previous implementations by \cite{Russell2023} and \cite{Macintosh2024} from adopting the latest Unity release.
+
+\subsection{Architecture}
+Unity uses 'scenes' to separate different 'views' of the application and works akin to how a webpage is in a web application. Within these scenes, a \textit{GameObject}, the most basic object that can be added to any scene, can be manipulated into various elements such as a menu interface or 3D objects as the visual representation of the virtual environment. C\# scripts can then be appended to any GameObjects to drive any functionalities within the application, such as triggering a response or controlling logic.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1\linewidth]{images/UnityStructure.png}
+    \caption{Structure of a Unity scene and a GameObject 'Handler'}
+    \label{fig:Unity-Structure}
+\end{figure}
+
+As seen in \textbf{Figure \ref{fig:Unity-Structure}}, it is possible to append multiple scripts together in 1 GameObject and reference them in any of the scripts appended to the same GameObject. Additionally, when writing the C\# scripts, Unity also allows other GameObjects to be attached to these scripts simply by declaring a public variable within the script. These GameObjects can then be used as variables in the script, enabling the manipulation of any attribute the other GameObject contains. Declaring a variable as public also enables the manipulation of variables through the Editor (the UI interface as shown in Figure \ref{fig:Unity-Structure})
+
+Although it is technically feasible to integrate all functionalities, such as Visual Field Testing (VFT) and Visual Field Remapping (VFR), within a single scene by adjusting their visibility, this approach would likely lead to a disorganized and complex codebase. As outlined by \cite{Sun2015ModularitysCompany}, such an implementation would hinder code comprehensibility and impede future contributions to the project. Moreover, merging all functionalities within a single scene is not aligned with best practices in software engineering and should, therefore, be avoided. Given that the primary objective of this project is to facilitate future modifications and extensions, maintaining a structured and modular approach to development is essential.
+
+% \todo{unity diagram}
+
+\section{Integrating the Different Projects}
+% Explain first on the attempt to port the projects into a newer version. Explain the hardships of integrating both modules and focken SDK deprecated and purged from the official website, prompting us to backtrack and just use the older version.
+
+% Initially, it was planned for this project to port previous implementations of VFT and VFR into the latest version of Unity, and this was attempted several times but it was deemed to be more challenging than initially expected. 
+
+% The first challenge that was encountered was the deprecated elements of Unity when migrating to the newer version (v2022.3). The main challenge however was the SDK required to run the functionalities of camera passthrough (live camera feed) and eye-tracking was deprecated, with all of its documentations and downloads to obtain the . 
+
+% * Initially, we tried to copy the previous setup and use the SDK in the new version of Unity, but cannot because we cannot get the SDK.
+% * Apparently, the developer of the SDK had removed the SDK from the internet including all of their documentations too. It was done because they were trying to replace the older SDK with a new SDK that uses the OpenXR standards. However, due to the upgrade, the camera passthrough functionality was deprecated for the HTC Vive Pro Eye, the HMD we were using.
+% * This forces us to explore the previous implementations so that we understand more about how the older SDK was implemented. However because we cannot get admin access, we could not run the applications properly and investigate how previous implementation works.
+% * This was then resolved earlier this year where we finally could get admin access on our office machine.
+% * After some investigation and testing around with the previous projects, it was decided to pivot the development process from building the solution from scratch to just use the previous projects as the base where we will integrate it into one single application and iterate our builds from there.
+
+
+\subsection{Deprecated SRWorks \& SRAnipal SDK}
+SRWorks and SRAnipal were the Software Development Kit (SDK) that were used in both of the projects intended for the integration. Both SDKs offered many features, including camera passthrough and eye-tracking, which were essential for the implementation of VF Testing and VF Remapping.
+
+Initially, an attempt was made to replicate the previous setup and integrate the SDKs into the latest Unity version. However, this approach was not feasible due to the unavailability of the SDKs. The original developer, HTC\footnote{the same company that manufactured the headset we were using} had removed both the SDKs and its accompanying documentation from online sources as part of a transition to a new streamlined SDK based on the OpenXR\footnote{A cross-platform standard to simplify XR development. See: \href{https://www.khronos.org/openxr/\#xr-fragmentation}{\textbf{OpenXR}.}} standard. Consequently, this upgrade resulted in the deprecation of the camera passthrough functionality for the HTC Vive Pro Eye, the head-mounted display (HMD) used in this project.
+
+As a result, it became necessary to examine prior implementations to gain a deeper understanding of how the older SDK had been utilized to progress with further improvements towards the system. After multiple failed attempts to set up and run the project properly, it was found that administrative access on the office machine was required to execute the runtime of the SRWorks and SRAnipal SDKs. The process to obtain administrative access was initially delayed but later resolved, and the previous projects was able to be explored.
+
+% However, due to the lack of administrative access to the machines in the supervisor's office, it was not possible to properly execute previous applications or investigate their functionality in detail. This issue was resolved the latter half of the semester year access was finally granted on one the office machines.
+
+\subsection{Change of approach to development process}
+Following extensive investigation and testing of previous projects, the development approach was revised. Rather than constructing the solution entirely from scratch, it was determined that the most efficient course of action would be to build upon existing projects. These previous implementations were to be merged into a single application, forming the foundation upon which further iterations and refinements were made.
+
+The integration of both projects was not a straightforward process of simply merging one into the other. As each project relied on multiple dependencies essential for their functionality, a meticulous approach was required to ensure that all dependencies remained intact during the integration process. Careful steps were taken to preserve the integrity of both projects, ensuring that the combined application could operate seamlessly within a single project file.
+
+The VF Testing project served as the base of the new integrated project file. Then, the \textit{scene} from VF Remapping, along with its accompanying scripts and other dependencies such as prefabs and relevant packages, were imported over to the new base project. The imported scene was then cross-checked with the original project to ensure the same working setup was achieved before testing the setup. There was a problem where a package caused a conflict within the new project, but it was resolved by deleting the package after confirming that there was nothing that depended on the package. At last, the integration of both of the previous projects that implemented VF Testing and VF Remapping into one single project file was successful.
+
+\section{User Interface and Interactions}
+% How the user interface is implemented at the end.
+The menu environment retains the similar settings from the original VF Remapping scene where a skybox is applied in the background and a plane is set as the ground below where the user will spawn within the environment. Utilising the canvas and panels system of Unity, the design from \ref{sec:design} was implemented throughout all the menus within the application. The stationary menus are placed a few metres in front of the user as it would be easier to read the contents of the menus at this distance. 
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/VRView_CORE.png}
+    \caption{The core menu viewed in VR environment}
+    \label{fig:coreMenuVRView}
+\end{figure}
+
+To interact with the menu, a laser pointing method as seen as a straight line coming out from the controller in \textbf{Figure \ref{fig:coreMenuVRView}} is provided by \textbf{SteamVR}, another SDK used in this project. SteamVR also provides the interface to retrieve inputs from the controller of the HMD which is used for other parts in the projects that require user interactions, simplifying the process of adding interactivity within the application.
+
+\section{Visual Field Testing}
+The Visual Field Testing module taken from \cite{Macintosh2024} adapted the HVF test into a working VF testing procedure that can be done using the HMD. Caleb then improved this module by introducing \textit{Repeated Fixed Intensity Algorithm} to perform the test due to hardware limitations to obtain and modify the luminance value within the HMD.
+% \todo{cite caleb and what he did}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/VRView_VFT.png}
+    \caption{The menu of the VF Testing module with two options; Test With Feedback or Without Feedback}
+    \label{fig:VFTview}
+\end{figure}
+
+To perform the testing and measure the visual field, the user must first perform an eye-tracking calibration procedure provided by the SRWorks SDK used in the project. By navigating into the VF Testing module from the Core Menu, the user may start the testing procedure by pressing the space bar, where a countdown will begin before starting the test procedure. While focusing on the central fixation point, whenever the user sees a flashing dot, the user is expected to respond by pressing the space bar to record their input.
+
+The test runs for a couple of minutes before automatically stopping and quitting to the main menu, then generates a readable test report in PDF format.
+
+
+\section{Visual Field Remapping}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{images/VRView_VFR.png}
+    \caption{VR Remapping menu}
+    \label{fig:VFRView}
+\end{figure}
+
+The VF Remapping module also retains the same functionalities as per the previous project taken from \cite{Russell2023}. In addition to the previous two manual remap modes, the module now has another option to perform automatic remapping. When selecting this new option, another submenu will appear, prompting the user to choose one of the 4 preset conditions implemented as outlined in \autoref{item:autoRemapConds}
+
+\begin{figure}[!h]
+    \centering
+    
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\linewidth]{images/VRView_VFR-RemapMode_sq.png}
+        \caption{The UI controls on the overlayed controller model}
+        \label{fig:controller}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\linewidth]{images/VRView_VFR-RemapMode_interacted_sq.png}
+        \caption{The overlayed UI controls when input is detected}
+        \label{fig:interactedController}
+    \end{subfigure}
+\end{figure}
+
+Selecting any of the modes will activate the live camera passthrough mode, enabling the user to see the real world environment where the remapping process takes place. Within this state, the 3D model of the controller will be overlayed, creating an augmented reality (AR) display of the controller with a helpful user interface from the user's perspective. This intuitive user interface enables the user to be constantly informed about the available controls to them when remapping the live camera passthrough.
+
+\subsection{Automatic Remapping operation}
+% How automatic remapping was implemented? Use Presets. Why? Why not use VFT data?
+The function of automatic remapping follows the same implementation as to how manual remapping would work, except that it is applied automatically and gradually before it sets on the desired position and scaling of the camera when initiated. Based on the pseudocode provided in the Design section, the code is translated into a script in C\# as seen in \textbf{Listing \ref{lst:autoremap}} below.
+
+
+\begin{lstlisting}[language={[Sharp]C}, float, caption={An excerpt of the automatic remapping script for one of the preset conditions}, label=lst:autoremap]
+    
+    float scaleSpeed = 0.1f;
+    float posSpeed = 0.001f;
+    
+    ...
+    // Right-side Hemianopia autoremap
+    public void smoothHHRight() {
+        // Run coroutine for both scaling and positioning
+        StartCoroutine(scaleAdjustmentHHRight());
+        StartCoroutine(posAdjustmentHHRight());
+    }
+
+    IEnumerator scaleAdjustmentHHRight() {
+        while (leftEyeCamera.transform.localScale.x >= 0.6f) {
+            leftEyeCamera.transform.localScale -= new Vector3(scaleSpeed, scaleSpeed,scaleSpeed) * Time.deltaTime;
+            rightEyeCamera.transform.localScale -= new Vector3(scaleSpeed, scaleSpeed,scaleSpeed) * Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
+    IEnumerator posAdjustmentHHRight() {
+        while (leftEyeCamera.transform.localPosition.x >= targetPos) {
+
+            Vector3 leftPos = leftEyeCamera.transform.localPosition;
+            Vector3 rightPos = rightEyeCamera.transform.localPosition;
+
+            // Subtract from the x component
+            leftPos -= new Vector3(posSpeed, 0f, 0f);
+            rightPos -= new Vector3(posSpeed, 0f, 0f);
+
+            // Assign the updated position back
+            leftEyeCamera.transform.localPosition = leftPos;
+            rightEyeCamera.transform.localPosition = rightPos;
+
+            yield return null;
+        }
+    }
+
+\end{lstlisting}
+
+In Listing~\ref{lst:autoremap}, the function smoothHHRight is responsible for executing the automatic remapping process. Within this function, the Unity-specific method \texttt{StartCoroutine()} is invoked. This method enables asynchronous execution of code across multiple frames, which is particularly useful for implementing smooth animations or gradual transitions—an essential aspect of the automatic remapping implemented in this project\footnote{\href{https://docs.unity3d.com/6000.0/Documentation/Manual/coroutines.html}{More about Coroutines in Unity}}. The coroutines individually handle the tasks of adjusting the scale and position of the passthrough view. In the case of position adjustment, it was necessary to explicitly reassign the updated position within the \texttt{posAdjustmentHHRight()} function, as Unity's position property for a GameObject cannot be modified directly.
+
+The presets for automatic remapping used for each condition are decided as the listing below after multiple tests by myself while being simulated with partial blindness following the same way it will be evaluated in \textbf{Chapter \ref{sec:Eval}}.
+
+\begin{itemize}
+    \item \textbf{HH\footnote{Homonymous Hemianopia}-Right:} X-axis position = -0.5, X\&Y scale = 0.6
+    \item \textbf{HH-Left:} X-axis position = 0.5, X\&Y scale = 0.6
+    \item \textbf{Quadrantanopia-Right Temporal:} X-axis position = -1, X\&Y scale = 0.65
+    \item \textbf{Quadrantanopia-Right Temporal:} X-axis position = 1, X\&Y scale = 0.65
+\end{itemize}
+
+
+\section{Summary}
+This chapter detailed the implementation aspects of the project, including the hardware and software environments, system architecture, project integration process, and described the specific module functionalities.
+
+The HTC Vive Pro Eye headset was used due to its eye-tracking capabilities and camera passthrough features, which were vital for the development of both VF Testing and Remapping modules. Despite setbacks due to the deprecation of some of the SDKs required to implement both modules' functionalities, both modules were successfully merged and integrated into a single project file, streamlining future development processes. 
+
+User interaction was implemented through a VR-based menu system, with UI elements placed within an intuitive 3D environment. The SteamVR SDK was used for input handling, allowing users to interact with the application via controller-based laser pointers.
+
+The VF Testing module adapted the traditional fixed-intensity testing method test into a VR-compatible format. The VF Remapping module retained previous manual remapping functionalities and introduced a new automatic remapping mode. This new feature smoothly applies the remapping process, potentially improving the user experience during remapping tasks.
+
+In the next chapter, the report follows the evaluation process to investigate the effectiveness of the newly implemented feature, the automatic remapping, using unique methodologies and scientific research methods. Evaluation of the general usability of the integrated system will also be carried out alongside it.
+
+%==================================================================================================================================
+\chapter{Evaluation}
+\label{sec:Eval}
+In this chapter, we outline the experimental procedure used to evaluate the VR application we have implemented, whether it is usable enough and also evaluate the effectiveness of the new functionality of automatic remapping. We discuss how our evaluation answers our question before concluding and laying out possible future works in the following chapter.
+
+While the main focus of this project is to integrate two different implementations, this project also explores the idea of automatic remapping and, therefore, it was decided to investigate the effectiveness of using automatic remapping over manual remapping by designing a user study that will answer the research question.
+
+% \section{Overview}
+% 2 evaluations were carried out. VRMenuing and then real user testing with blindness simulation.
+
+% As this project's main focus on integrating two different previous projects, a crucial metric to assess is the usability of the system and finding out the most suitable user interface and navigation system that would be used in the new integrated application. 
+
+
+
+\section{Experimental Design}
+
+\subsection{Methodology}
+As recruiting participants with hemianopia requires a lengthy process involving the NHS and potentially multiple layers of ethics clearance, an alternative approach was chosen to evaluate our application by simulating the visual defects whilst wearing the HMD. In the previous project by \cite{Russell2023}, he simulated a right homonymous hemianopia condition using a non-prescription glasses taped with some paper, where test participants would then be asked to wear this during his evaluation runs. 
+
+% Therefore, instead of simulating it using a pair of glasses, we cut some pieces of paper to fit into the lens of the HMD and then reshape it to simulate the different visual defects we want.
+
+In this project however, due to the integration with the VF Testing, such a setup would interfere with the functionality of the eye-tracker. Instead, a modified method was implemented by cutting pieces of paper to fit directly onto the HMD lenses and reshaping them to simulate specific visual impairments (see \ref{fig:piecesPaper}). A putty-like reusable adhesive\footnote{Blu Tack} is applied to parts of the piece of paper and then stuck to the lens of the VR headset. As the reusable adhesive only leaves little to no residue on the HMD, the partial blindness could be simulated safely without significantly damaging the HMD. 
+
+\begin{figure}[!h]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/Pieces of paper.jpg}
+        \caption{The pieces of paper used to simulate partial blindness on the HMD. }
+        \label{fig:piecesPaper}
+    \end{subfigure}
+    \hfill
+    % \caption{The pieces of paper used to simulate partial blindness on the HMD} \label{fig:piecePapers}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/HemianopiaSimulator.jpg}    
+        \caption{The HMD with the pieces of paper attached to its lenses}
+        \label{fig:simulatedHMDsticker}
+    \end{subfigure}
+    
+    % \caption{\textbf{Left:} \textbf{Right:} } 
+    
+
+    
+    % \vspace{1cm}
+\end{figure}
+
+% You will then be exposed to different simulations of partial eye blindness that will be applied to the headset. While looking steadily at the table, you will either be asked to perform a manual ‘remapping’ of the live camera view until you can identify all the objects on the table, or it will be automatically be ‘remapped’ for you. Once you can identify all the objects on the table, press the home button and then the trigger button to conclude the testing for the condition. After each condition, you will be asked to take off the headset and fill in a survey answering a series of questions regarding your performance and comfort. Before putting the headset back on for the next conditions, feel free to take a break as long as you want. 
+
+ 
+
+For the scope of this project, the experiment seeks to evaluate the following hemianopia conditions, following the same as outlined in \ref{sec:design}
+\begin{itemize}
+    \item \textbf{Homonymous hemianopia} - Right
+    \item \textbf{Homonymous hemianopia} - Left
+    \item \textbf{Quadrantanopia} - Right Temporal (Top-right quarter)
+    \item \textbf{Quadrantanopia} - Left Parietal (Bottom-left quarter)
+\end{itemize}
+
+It was initially planned to also include the Bitemporal hemianopia condition, however, pilot testing revealed that the condition would cause severe nausea and cybersickness effect, and thus, the condition was excluded from the test conditions.
+
+
+
+% The main task performed for this experiment is an object identification task where the participants will be asked to identify the objects on a table while being simulated with partial blindness. They would then be asked to remap their vision in the manual remapping mode while in automatic mode, the vision would be remapped automatically for them.
+
+\begin{figure}[!h]
+    \centering
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/test_normalVision.png}
+        \caption{A normal vision from the HMD lens view (one eye).}
+    \end{subfigure}
+    \hfill
+    % \caption{The pieces of paper used to simulate partial blindness on the HMD} \label{fig:piecePapers}
+    \begin{subfigure}[b]{0.4\textwidth}
+        \includegraphics[width=\textwidth]{images/test_simulatedVision.png}    
+        \caption{A simulated HH-left blindness from the HMD lens view (one eye).}
+    \end{subfigure}
+    
+    \caption{Figures above showing example of simulated blindness applied during the experiment procedure} 
+    \label{fig:SimHemianopia}
+
+    
+    % \vspace{1cm}
+\end{figure}
+
+The primary experimental task involved an object identification exercise in which participants were asked to identify objects on a table while experiencing simulated partial blindness. Participants were then required to remap their vision manually in the manual remapping mode, whereas in automatic remapping mode, the system adjusted the visual field automatically.
+
+Surveys are used to collect qualitative measurements of simulator sickness using SSQ\footnote{Simulator Sickness Questionnaire} and perceived task load using NASA-TLX\footnote{NASA Task Load Index} of the participants. 
+
+To automate the process of collecting comparative quantitative data between the conditions tested, a custom script will record the time taken when the user launches the remapping mode interface. This script also records the final position and scaling adjustments applied at the end of the task of the experiment, and these data will be used to prove the hypothesis posed in the following sections.
+
+% why use nasa tlx, bla3
+
+\subsection{Experimental Procedure}
+The experiment was carried out with participants (n=8) sit on a chair with a fixed position located next to a table that had 6 random items on it for the duration of the study. After reading through an introduction script and some briefing (see \ref{appx:infoSheet}), the participant signs a digital consent form agreeing to the study.
+
+The participant will firstly be familiarised with the HTC Vive Pro HMD and its controller before being allowed to explore the application itself, learning how navigation and controls work in the application. \textit{After that}, the test administrator would remove the headset from the participant and apply the first condition of the simulated partial blindness (the piece of paper) onto the HMD's lenses. Before the participant wears the HMD, they will be asked to fill in a set of questions based on the Simulator Sickness Questionnaire (SSQ).
+% \todo{include chair and table setting}
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/TestAdminView.jpg}
+    \caption{Experiment setup with the user sitting in front of a table with objects on it}
+    \label{fig:tableSetup}
+\end{figure}
+
+After wearing the HMD, the participant will enter the remap mode where the participant could see the real world environment and the 6 objects on the table in front of them. At this point, the test administrator would ask the participant to identify all the objects on the table and whether they could see all of them or not. Depending on the current condition of the experiment, participants are asked to either manually remap their FOV until they can see all objects on the table or select one of the preset automatic remappings. After they complete this task, they will push the 'home' button on the controller to pause the timer measuring their time when carrying out the task. The participant is asked again to identify all objects on the table and verify if they could see all of them in their newly remapped FOV. The participant will then press the trigger button on the controller to save the results of their session and return to the VF Remapping submenu within the application.
+
+The test administrator will remove the headset from the participant, then they will be asked to fill in a post-test questionnaire of the SSQ followed by a NASA-TLX questionnaire. The participant is given the opportunity to rest for as long as they like before continuing with the next condition. The process repeats until all conditions are evaluated
+
+\subsection{Limitations}
+It is acknowledged that there are potential limitations from the experiment methodologies presented above. Firstly, due to the type of chair used in the experiment, which is a swivel office chair, it may have introduced inconsistencies in measurement despite best efforts taken to ensure the participant does not move significantly during the study. Secondly, due to the varying height of participants, the angle of the participant's head when looking down towards the table may have also impacted the results of the study. Again, while efforts were taken to calibrate their view, it was hard to ensure the same starting angle for each participant.
+
+Another limitation of this study pertains to the limited sample size (n=8). While a smaller sample facilitated the execution of the study by streamlining data collection and reducing the overall time required, it also introduced constraints in terms of generalisability. The findings derived from this study may not be fully representative of the broader population, as a larger sample would provide more robust and statistically reliable conclusions. Future research should consider increasing the sample size to enhance the validity and applicability of the results to a wider audience.
+
+% Several methodological limitations in the experimental design are acknowledged. First, the use of a swivel office chair may have introduced inconsistencies in measurement, despite efforts to minimize participant movement during the study. Second, variations in participants' height may have influenced the angle at which they looked down at the table, potentially affecting the results. Although calibration procedures were implemented to standardize participants' viewpoints, ensuring a consistent initial head position across all participants remained challenging.
+
+\section{Hypothesis}
+We hypothesised that automatic remapping is more efficient than manual remapping. We therefore put forward:
+
+\begin{itemize}
+    \item \textbf{Null Hypothesis ($H_0$):} Automatic remapping does not lead to improved efficiency, accuracy and comfort compared to manual remapping. 
+    \item \textbf{Alternative Hypothesis ($H_A$):} Automatic remapping leads to significantly higher efficiency, accuracy and comfort compared to manual remapping.
+
+\end{itemize}
+
+It was hypothesized that automatic remapping would enhance accuracy, comfort, and efficiency in the remapping process compared to manual remapping. This expectation is based on the premise that manual remapping requires users to actively adjust their visual field in terms of positioning and scaling, which may introduce challenges. During this process, users are susceptible to cybersickness due to the continuous shifting of their visual perspective. Additionally, achieving precise remapping may be difficult due to the limitations of manual controls. \newline
+
+% The accuracy of the remapping process can be ideally defined as how close the applied positional and scaling adjustments are to the ideal adjustments according to each visual impairment condition. However, since there is no standardized basis for the 'ideal' adjustments due to how visual impairment varies greatly between people, this experiment compares the final position and scaling adjustments between the manual and automatic remapping modes instead. If the difference of the adjustments between the two modes is not significant, we can argue that automatic remapping produces the same output as manual remapping.
+
+Each of the metrics to be measured in our hypothesis is explained as the following:
+\begin{itemize}
+    \item \textbf{Efficiency} is measured by the time taken to remap the unshifted vision of the real-world environment into the available FOV seen by the participant during each condition. \textit{Shorter times} equals \textit{higher} efficiency
+    \item \textbf{Accuracy} is measured by comparing the final position and scaling adjustments between the manual and automatic remapping modes. The \textit{lower} the difference, the \textit{higher} the accuracy.
+    \item \textbf{Comfort} is measured using SSQ and NASA-TLX scores. The \textit{lower} the scores, the \textit{higher} the comfort.
+\end{itemize}
+
+% \section{Evidence}
+
+% Make sure you present your evidence well. Use appropriate visualisations, reporting techniques and statistical analysis, as appropriate. The point is not to dump all the data you have but to present an argument well supported by evidence gathered.
+
+\section{Quantitive Results Analysis}
+\subsection{Time taken to remap (Efficiency)}
+In terms of the results obtained from the remapping task, it is evident that in \textbf{Figure \ref{fig:meanTimeTaken}}, the time taken to complete the remapping process is slightly higher when using manual remapping compared to automatic remapping. As automatic remapping gradually applies the adjustments of the visual field in a fixed time, the time taken to complete the remapping process is therefore, consistent. We can reject our null hypothesis and accept the alternative hypothesis in terms of efficiency. An interesting pattern that can be observed across both manual and automatic remapping modes is that the time taken to complete the remapping process is higher when quadrantanopia is simulated compared to homonymous hemianopia simulations. This can be attributed to the additional adjustments of positioning and scaling required to compensate for the irregular parts where the vision loss occurs compared to homonymous hemianopia conditions, which are more symmetrical and simpler to apply adjustments.
+
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/meanTimeTaken_altcolour.png}
+    \caption{Mean time taken to complete task}
+    \label{fig:meanTimeTaken}
+\end{figure}
+
+
+\subsection{Accuracy of remapping}
+
+While data was collected to measure the final remapped position and scaling after task completion, due to the nature of the preset values used in automatic remapping mode, this resulted in the standard deviation  
+
+\begin{table}[!h]
+    
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+         \textbf{Condition} &  \textbf{Manual} & \textbf{Auto} & \textbf{Differences}\\
+         \hline
+         HH-Right & -0.53  & -0.50 & -0.02 \\
+         \hline
+         HH-Left & 0.40 & 0.50 & -0.10\\
+         \hline
+         Quad Top-Right & -0.47 & -1.00 & 0.54 \\
+         \hline
+         Quad Bottom-Left & 0.33 & 1.00 & -0.68\\
+         \hline
+    \end{tabular}
+    \vskip 0.5em
+    \caption{Mean differences of the x-axis position of the remapped vision}
+    \label{tbl:meanRemappedPos}
+\end{table}
+
+As observed in \textbf{Figure \ref{fig:meanRemappedPos}} and \textbf{Table \ref{tbl:meanRemappedPos}}, it is revealed that the mean differences of the final X-axis position after a remapping process between manual and automatic conditions are low for both homonymous hemianopia conditions, suggesting the effectiveness of the preset position adjustments that had been applied for both conditions, validating our alternative hypothesis in terms of accuracy. On the contrary, there are significant differences between the mean of the final remapped position where participants adjusted their position less than what the preset automatic remapping mode suggested. Therefore, the null hypothesis can be rejected for homonymous hemianopia conditions but is accepted in quadrantanopia conditions. This may be due to the non-symmetrical nature of the simulated visual impairment, which requires participants to spend more time remapping their field of view, thereby increasing the cognitive load during task completion.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/MeanRemappedPosition.png}
+    \caption{Mean Remapped Position (X-axis)}
+    \label{fig:meanRemappedPos}
+\end{figure}
+
+\begin{table}[!h]
+    \label{tbl:meanRemappedScale}
+    \centering
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+         \textbf{Condition} &  \textbf{Manual} & \textbf{Auto} & \textbf{Differences}\\
+         \hline
+         HH-Right & 0.70  & 0.60 & 0.10 \\
+         \hline
+         HH-Left & 0.74 & 0.60 & 0.14\\
+         \hline
+         Quad Top-Right & 0.66 & 0.65 & 0.01 \\
+         \hline
+         Quad Bottom-Left & 0.68 & 0.65 & 0.03\\
+         \hline
+    \end{tabular}
+    \vskip 0.5em
+    \caption{Mean differences of the scale of the remapped vision}
+\end{table}
+
+In \textbf{Figure \ref{fig:meanRemappedScale}}, the mean remapped scale presents interesting results where the low mean differences with quadrantanopia simulations in both manual and automatic remapping modes suggest that the applied preset scaling is highly accurate. Meanwhile, the high mean difference of the scaling between manual and automatic remapping for homonymous hemianopia suggests inaccuracies of the preset scaling employed by the automatic mode. This seems to be the inverse of the condition previously seen with the remapped x-axis position. In this case, the null hypothesis may be accepted for homonymous hemianopia conditions but is rejected for both quadrantanopia conditions.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{images/MeanRemappedScale.png}
+    \caption{Mean remapped scale, uniform through X \& Y axis}
+    \label{fig:meanRemappedScale}
+\end{figure}
+
+% \subsection{Mean Differences}
+% \begin{table}[!h]
+%     \label{tbl:meanDiffTimeTaken}
+%     \centering
+%     \renewcommand{\arraystretch}{1.5}
+%     \begin{tabular}{|c|c|c|c|}
+%         \hline
+%          \textbf{Condition} &  \textbf{Manual} & \textbf{Auto} & \textbf{Differences}\\
+%          \hline
+%          HH-Right & 46.37  & 9.09 & 37.29 \\
+%          \hline
+%          HH-Left & 49.83 & 9.01 & 40.82 \\
+%          \hline
+%          Quad Top-Right & 64.61 & 12.86 & 51.75 \\
+%          \hline
+%          Quad Bottom-Left & 66.09 & 12.29 & 53.79\\
+%          \hline
+%     \end{tabular}
+%     \vskip 0.5em
+%     \caption{Mean differences of the time taken to remap between manual and automatic modes}
+% \end{table}
+
+
+
+% Pairwise comparison
+% \subsection{NASA-TLX}
+% \subsection{Simulator Sickness Questionnaire}
+\section{Qualitative results}
+
+\subsection{SSQ}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/mean-SSQ.png}
+    \caption{Mean SSQ score between remapping modes, take \textbf{post-test}}
+    \label{fig:SSQ}
+\end{figure}
+
+Results from the SSQ revealed that the majority of participants did not experience any kind of cybersickness and answered 'None' to most of the elements of the SSQ throughout both pre-test and post-test responses. This was interesting as it was expected that participants would experience some sort of cybersickness due to the nature of how the vision is shifted during the remapping process. Comparisons of the mean SSQ scores between both remapping modes taken after the remapping tasks (see \textbf{Figure \ref{fig:SSQ}}) revealed that participants experienced less cybersickness with automatic remapping compared to manual remapping with a difference of 0.019. While not a huge difference, results from \textbf{Figure \ref{fig:PostTest-SSQ}} evidently show that automatic remapping mode reported fewer instances of simulator sickness post-test when compared to manual remapping mode. This proves that automatic remapping mode reduces cybersickness and may increase comfort when remapping the visual field.
+
+\begin{figure}[!h]
+    \centering
+
+    \begin{subfigure}[b]{0.8\textwidth}
+        \includegraphics[width=\linewidth]{images/SSQ-Post-Manual.png}
+        \caption{Post-test SSQ, Manual mode}
+        \label{fig:SSQ-Posttest-Manual}
+    \end{subfigure}
+    \vskip 0.5em
+    \begin{subfigure}[b]{0.8\textwidth}
+        \includegraphics[width=\linewidth]{images/SSQ-Post-Auto.png}
+        \caption{Post-test SSQ, Auto mode}
+        \label{fig:SSQ-Posttest-Auto}
+    \end{subfigure}
+    
+    \caption{Post-test SSQ score count for both remapping modes}
+    \label{fig:PostTest-SSQ}
+\end{figure}
+
+
+
+
+\subsection{NASA-TLX}
+An overview of the gathered NASA-TLX responses revealed that most participants experienced low task loads across all evaluation runs. Most participants were able to complete the tasks of the experiment without exerting too much effort, evident with the low scores reported in the results. As seen in \textbf{Figure \ref{fig:meanTLX}}, the difference of the mean task load between the two remapping modes is not significant, meaning that users perceive workload the same across both modes and exert almost the same amount of effort. In this case, we accept the null hypothesis that automatic remapping does not lead to improved comfort. The low differences were possibly caused by the simplicity of the task or to the sample demographics,, which predominantly consisted of individuals mostly from a computer science background where they are more familiar with technological devices.
+
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/mean-TLX.png}
+    \caption{Mean task load scores for all participants between both remapping modes}
+    \label{fig:meanTLX}
+\end{figure}
+
+\subsection{Preferred remapping mode and other qualitative results}
+The survey at the end of the experiment also asked the participants which remapping mode they preferred and their reasoning. Half of the (n=8) participants chose automatic remapping as their preferred remapping mode, citing that they would not need to exert additional effort to perform the adjustment to their simulated partial blinded vision and better accuracy compared to manual remapping. Meanwhile, the other half of the participants felt that manual remapping was the better way to remap their partial blindness during the experiment. They mostly argued how they could better control the adjustments as they desired with the manual remapping compared to the fixed adjustments used by the automatic remapping. This observation is intriguing as there was no majority on the preferred mode and warrants further work to investigate, especially if personalised automatic adjustments based on VF testing data were to be implemented.
+
+Apart from responses on the preferred remapping mode, simple usability questions based on the SUS\footnote{System Usability Scale} about the developed application were also asked. Generally, the participants found the application to be intuitive and easy to use. They also found it potentially helpful towards the target users of the application: people with visual impairments, agreeing to the benefits that the application may provide towards the group of users. 
+
+
+
+\section{Summary}
+This chapter presents the experimental procedure used to evaluate the usability of the implemented VR application and the effectiveness of its automatic remapping functionality. The study aims to determine whether automatic remapping provides a significant improvement over manual remapping. Given the challenges of recruiting participants with hemianopia due to ethical and logistical constraints, the experiment simulated visual impairments using a modified method of applying opaque materials to the VR headset lenses. The experiment tested four hemianopia conditions while excluding bitemporal hemianopia due to cybersickness concerns.  
+
+The study involved eight participants who completed an object identification task under both manual and automatic remapping conditions. Quantitative data, including task completion time and remapping accuracy, were collected via a custom script, while qualitative data were gathered using the Simulator Sickness Questionnaire (SSQ) and NASA Task Load Index (NASA-TLX). Results indicate that automatic remapping generally reduced task completion time, particularly for homonymous hemianopia conditions, though it was less effective for quadrantanopia. Differences in the final remapped position and scaling suggest that automatic remapping presets may require further refinement.  
+
+Qualitative results from the SSQ revealed minimal cybersickness among participants, with better performance  while NASA-TLX responses indicated low task load across all conditions. Participant preferences for remapping mode were evenly split, with some favoring automatic remapping for ease and accuracy, while others preferred manual remapping for greater control. Usability assessments confirmed that the application was intuitive and could be beneficial for individuals with visual impairments. The findings suggest that further refinements, particularly in personalized automatic remapping adjustments, are necessary for broader application.
+
+
+
+
+%==================================================================================================================================
+\chapter{Conclusion}
+\
+% Summarise the whole project for a lazy reader who didn't read the rest (e.g. a prize-awarding committee). This chapter should be short in most dissertations; maybe one to three pages.
+% \section{Guidance}
+% \begin{itemize}
+%     \item
+%         Summarise briefly and fairly.
+%     \item
+%         You should be addressing the general problem you introduced in the
+%         Introduction.        
+%     \item
+%         Include summary of concrete results (``the new compiler ran 2x
+%         faster'')
+%     \item
+%         Indicate what future work could be done, but remember: \textbf{you
+%         won't get credit for things you haven't done}.
+% \end{itemize}
+
+\section{Summary}
+% Summarise what you did; answer the general questions you asked in the introduction. What did you achieve? Briefly describe what was built and summarise the evaluation results.
+
+This project delivered an integrated VR-based application that allows users to measure their visual field and apply adjustments that could help detect visual field loss as well as alleviating the partial loss of eyesight. Built with the use of HTC Vive Pro Eye headset, the application leverages its camera passthrough and eye-tracking capabilities to offer accessible Visual Field Testing (VFT) method and Visual Field Remapping (VFR) methods. It builds upon previous projects devised by previous students and resolves the challenges faced to integrate them together while preparing the application for wider deployment by streamlining the user interfaces across the whole integrated application. This project was also prepared to be easily extensible where new features may be added easily.
+
+The VFT module allows users to simulate the same visual field testing normally performed by an ophthalmologist. The VFR module allows users to view the real world environment through the HMD camera and shift this view into the users' available FOV. A new feature, the \textit{automatic remapping} was also successfully implemented, where unlike previous implementations that only used controllers to remap, this new method applies preset remapping transformations instead, reducing the cognitive load and addressing issues of cybersickness reported in earlier works.
+
+It was hypothesised that automatic remapping could potentially lead to improvements in terms of efficiency, accuracy and comfort when performing the remapping process. A user evaluation (n=8) was carried out to investigate this hypothesis where users were simulated with multiple types of visual impairment and tasked to remap their vision until they could identify all the objects on a table. Results from user evaluation suggest that while it is more efficient, more work needs to be done to improve its accuracy and comfortability. 
+
+Overall, the system was highly rated as being intuitive by participants with potential real-world application. This project not only showcases the possibility of a fully integrated VR-based application but also lays the groundwork for the various possibilities of future extensions.
+
+\section{Reflection}
+
+This project managed to produce a nicely integrated VR application that could perform multiple functionalities without switching applications. The design of the experiment was unique to answer the specific question posed by the hypothesis and something that I am proud to come up with, despite the weaknesses in the methodology. However, better control of the random variables in the experiment would drastically help in obtaining reliable data.
+
+The project met with multiple setbacks over the course of the semester year however. The initial setup of legacy projects was carried out late, resulting in delays in developing the final product. The deprecation of the old SDK and the unavailability of alternatives were unexpected and resulted in a change of direction during the development process. If this project were to start again, it is advised to cross-check for feature compatibilities and propose the use of a newer model of HMD to ease the development process.
+
+While a lot of sufficient data was collected during the user evaluation, the data analysis task was underestimated. A lot of the collected data were in weird orders, forcing a lot of time spent just to analyse simple metrics. In the future, this process would ideally be started earlier, along with the whole user evaluation process. More time spent on these matters would have improved the quality of this dissertation. 
+
+% It is a bit unfortunate that the originally proposed automatic remapping based on 
+
+\section{Future works}
+
+\subsection{Automatic remapping based on VFT data}
+As mentioned in \textbf{\hyperref[sec:analysisReq]{Analysis/Requirements}} as shortcoming, the project initially looked at the possibility of utilising the measured visual field to provide a highly personalised automatic remapping process, reducing the effort and increasing the accuracy even more to alleviate the effects of visual impairments. This feature would require the VF Remapping module to import data from the VF Testing module, then perform some calculations to determine the personalised remapping FOV. This feature was attempted by \cite{Liu2022VisualHemianopia} and \cite{Sayed2020ExpansionSpectacles}.
+
+\subsection{Porting to the latest version of Unity}
+The current solution still uses Unity 2019.4.35f1, which is no longer receiving updates and is being superseded by newer versions of Unity. While this project was largely restricted by the lack of support of the currently used HMD, future contributors should aim to upgrade the software version first before adding more new functionalities to it. It is also highly recommended to switch the SDK used in the current project, preferably with OpenXR integration due to their cross-platform capabilities. However, as reflected above, feature compatibilities should be cross-checked before proceeding with these tasks.
+
+
+\subsection{Portability of HMD}
+
+The HTC Vive Pro HMD used for this project requires itself to be tethered to a computer at all times to function, and this severely limits the mobility of the users, making it not viable for everyday use, especially when the application is designed to help users with visual impairments. A more lightweight standalone HMD could potentially be used, such as the Meta Quest Pro and the Vive XR Elite, which has the same capabilities required to run both modules of this project. More recently, Meta Quest 3 had recently released a support for their Passthrough Camera API\footnote{\href{https://developers.meta.com/horizon/documentation/unity/unity-pca-documentation}{Meta Horizon Unity PCA}}, which enables users to access the manipulation of the live camera feed. While the Quest 3 does not have an eye-tracker, it being one of the most advanced and most bought VR headsets nowadays could provide the opportunity to distribute the application widely. 
+
+\subsection{Adaptive remapping}
+One of the key issue with the current implementation of remapping is that the adjustments applied are static and will not move when the user move their eyes and this limits the effectiveness of the VF Remapping module. Theoretically, by using the eye tracker, it would be possible to update the remapped vision to follow the eye movement instead of static remapping, creating a more responsive solution of the camera feed remapping.
+
+\subsection{Visual Field exercises}
+One of the most interesting aspects of cortical visual impairment like hemianopia is the possibility for the neural pathways connecting to the eye to be stimulated and potentially restore the vision. This idea could be expanded by developing a new module that will introduce visual restoration training (VRT) exercises, as it has been proven by \cite{Gall2012ReadingDefects} that it could improve visual performance.
+
+%==================================================================================================================================
+%
+% 
+%==================================================================================================================================
+%  APPENDICES  
+
+\begin{appendices}
+
+\chapter{Appendices}
+
+% Use separate appendix chapters for groups of ancillary material that support your dissertation. 
+% Typical inclusions in the appendices are:
+
+% \begin{itemize}
+% \item
+%   Copies of ethics approvals (you must include these if you needed to get them)
+% \item
+%   Copies of questionnaires etc. used to gather data from subjects. Don't include
+%   voluminous data logs; instead submit these electronically alongside your source code.
+% \item
+%   Extensive tables or figures that are too bulky to fit in the main body of
+%   the report, particularly ones that are repetitive and summarised in the body.
+% \item Outline of the source code (e.g. directory structure), 
+%     or other architecture documentation like class diagrams.
+% \item User manuals, and any guides to starting/running the software. 
+% Your equivalent of \texttt{readme.md} should be included.
+
+% \end{itemize}
+
+% \textbf{Don't include your source code in the appendices}. It will be
+% submitted separately.
+
+\section{Background}
+\subsection{Hemianopia}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=1\linewidth]{images/visualFieldDefects.jpg}
+    \caption{Common visual field defects}
+    \label{fig:vfDefects}
+\end{figure}
+\newpage
+\section{Design}
+\section{Implementation materials}
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=0.8\paperwidth]{images/Design_Diagram.png}    
+
+    \caption{Full design diagram of the proposed system}
+\end{figure}
+\newpage
+
+
+\section{Evaluation}
+
+\newpage
+\subsection{Ethics checklist}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[page=1,width=0.85\linewidth]{appendix/Project_Ethics_checklist_signed.pdf}   
+    \caption{Filled ethics form, in line with School of Computing Science Guidelines. Page 1/2.}
+\end{figure}
+\newpage
+\begin{figure}[htbp]
+    % \centering
+    \includegraphics[page=2,width=1\linewidth]{appendix/Project_Ethics_checklist_signed.pdf}   
+    \caption{Filled ethics form, in line with School of Computing Science Guidelines. Page 2/2}
+\end{figure}
+\newpage
+
+\subsection{Information \& debrief sheet}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{appendix/Information Script.pdf}    
+    \caption{Information Script read before the start of user evaluation}
+    \label{appx:infoSheet}
+\end{figure}
+\newpage
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{appendix/Debrief sheet.pdf}    
+    \caption{Debrief sheet for participant}
+    \label{appx:debrief}
+\end{figure}
+\newpage
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{appendix/LatinSquares.jpg}    
+
+    \caption{Latin squares to balance participants}
+    \label{appx:latinSquares}
+\end{figure}
+\newpage
+
+
+%=======================================================================================
+\subsection{Data}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1\linewidth]{appendix/VFR_ManualData.png}    
+
+    \caption{Manual remapping data from user evaluation}
+\end{figure}
+\newpage
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\paperwidth]{appendix/VFR_AutoData.png}    
+
+    \caption{Full design diagram of the proposed system}
+\end{figure}
+\newpage
+
+%=========================================%
+\subsection{Survey questionnaire}
+\begin{figure}[htbp]
+    \includegraphics[page=1,width=1\linewidth]{appendix/Automatic_Remapping_of_Visual_Field_Survey.pdf}   
+    \caption{Survey questionnaire}
+\end{figure}
+\newpage
+\begin{figure}[htbp]
+    \includegraphics[page=2,width=1\linewidth]{appendix/Automatic_Remapping_of_Visual_Field_Survey.pdf}   
+    \caption{}
+\end{figure}
+\begin{figure}[htbp]
+    \includegraphics[page=3,width=1\linewidth]{appendix/Automatic_Remapping_of_Visual_Field_Survey.pdf}   
+    \caption{}
+\end{figure}
+\begin{figure}[htbp]
+    \includegraphics[page=4,width=1\linewidth]{appendix/Automatic_Remapping_of_Visual_Field_Survey.pdf}   
+    \caption{}
+\end{figure}
+\begin{figure}[htbp]
+    \includegraphics[page=5,width=1\linewidth]{appendix/Automatic_Remapping_of_Visual_Field_Survey.pdf}   
+    \caption{}
+\end{figure}
+\begin{figure}[htbp]
+    \includegraphics[page=6,width=1\linewidth]{appendix/Automatic_Remapping_of_Visual_Field_Survey.pdf}   
+    \caption{}
+\end{figure}
+\begin{figure}[htbp]
+    \includegraphics[page=7,width=1\linewidth]{appendix/Automatic_Remapping_of_Visual_Field_Survey.pdf}   
+    \caption{}
+\end{figure}
+\begin{figure}[htbp]
+    \includegraphics[page=8,width=1\linewidth]{appendix/Automatic_Remapping_of_Visual_Field_Survey.pdf}   
+    \caption{}
+\end{figure}
+\begin{figure}[htbp]
+    \includegraphics[page=9,width=1\linewidth]{appendix/Automatic_Remapping_of_Visual_Field_Survey.pdf}   
+    \caption{}
+\end{figure}
+
+
+
+\end{appendices}
+
+%==================================================================================================================================
+%   BIBLIOGRAPHY   
+
+% The bibliography style is agsm (Harvard)
+% The bibliography always appears last, after the appendices.
+
+\bibliographystyle{agsm}
+
+% Force the bibliography not to be numbered
+\renewcommand{\thechapter}{0} 
+\bibliography{l4proj}
+
+\end{document}

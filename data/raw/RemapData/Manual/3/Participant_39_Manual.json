@@ -1,0 +1,25 @@
+{
+    "participantName": "Participant 33 3A_A",
+    "partCount": 0,
+    "taskTime": 44.35075378417969,
+    "remappedPositionL": {
+        "x": -0.5399996638298035,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedPositionR": {
+        "x": -0.5399996638298035,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedScaleL": {
+        "x": 0.4390072226524353,
+        "y": 0.4390072226524353,
+        "z": 1.0
+    },
+    "remappedScaleR": {
+        "x": 0.4390072226524353,
+        "y": 0.4390072226524353,
+        "z": 1.0
+    }
+}

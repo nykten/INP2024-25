@@ -1,0 +1,25 @@
+{
+    "participantName": "Participant 104 8B_A",
+    "partCount": 0,
+    "taskTime": 27.599903106689454,
+    "remappedPositionL": {
+        "x": -0.47999969124794009,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedPositionR": {
+        "x": -0.47999969124794009,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedScaleL": {
+        "x": 0.6900039911270142,
+        "y": 0.6900039911270142,
+        "z": 1.0
+    },
+    "remappedScaleR": {
+        "x": 0.6900039911270142,
+        "y": 0.6900039911270142,
+        "z": 1.0
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "participantName": "Participant 105 8B_C",
+    "partCount": 0,
+    "taskTime": 8.140096664428711,
+    "remappedPositionL": {
+        "x": -1.001994252204895,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedPositionR": {
+        "x": -1.001994252204895,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedScaleL": {
+        "x": 0.6490435600280762,
+        "y": 0.6490435600280762,
+        "z": 0.6490435600280762
+    },
+    "remappedScaleR": {
+        "x": 0.6490435600280762,
+        "y": 0.6490435600280762,
+        "z": 0.6490435600280762
+    },
+    "comments": {
+        "comment": "not very successful on left hand down side"
+    }
+}

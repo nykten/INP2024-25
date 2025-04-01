@@ -1,0 +1,28 @@
+{
+    "participantName": "Participant 43 4B_A",
+    "partCount": 0,
+    "taskTime": 12.432296752929688,
+    "remappedPositionL": {
+        "x": -0.5009971261024475,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedPositionR": {
+        "x": -0.5009971261024475,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedScaleL": {
+        "x": 0.5997511744499207,
+        "y": 0.5997511744499207,
+        "z": 0.5997511744499207
+    },
+    "remappedScaleR": {
+        "x": 0.5997511744499207,
+        "y": 0.5997511744499207,
+        "z": 0.5997511744499207
+    },
+    "notes": {
+        "what": "Not successful much in identifying the items in the right hand side. Maybe affected by participant's exotropia"
+    }
+}

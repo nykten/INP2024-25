@@ -1,0 +1,25 @@
+{
+    "participantName": "Participant 56 5A_C",
+    "partCount": 0,
+    "taskTime": 27.43341064453125,
+    "remappedPositionL": {
+        "x": 0.3199998736381531,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedPositionR": {
+        "x": 0.3199998736381531,
+        "y": 0.0,
+        "z": 2.0
+    },
+    "remappedScaleL": {
+        "x": 0.5160062313079834,
+        "y": 0.5160062313079834,
+        "z": 1.0
+    },
+    "remappedScaleR": {
+        "x": 0.5160062313079834,
+        "y": 0.5160062313079834,
+        "z": 1.0
+    }
+}
