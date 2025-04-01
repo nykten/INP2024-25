@@ -2,7 +2,7 @@
 
 **Due to the large files of the Unity project, the only things submitted are the C# scripts and the scenes.**
 
-The full `src/` & the whole project is now hosted and accessible through the following repository: [test]([test](https://github.com))
+The full `src/` & the whole project is now hosted and accessible through the following repository: [INP2024-25](https://github.com/nykten/INP2024-25)
 
 ## System Overview
 
